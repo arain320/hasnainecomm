@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 const allowedOrigins = [
   "http://localhost:5173",
-  // "http://example.com",
+  "https://hasnainsaleem320.netlify.app/",
 ];
 
 app.use(cors({ credentials: true, origin: allowedOrigins }));
