@@ -19,12 +19,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const allowedOrigins = [
+  "https://hasnainsaleem320.netlify.app",
   "http://localhost:5173",
-  "https://hasnainsaleem320.netlify.app/",
 ];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
 
-app.use(cors({ credentials: true, origin: allowedOrigins }));
-// app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(cors(corsOptions));
 
 //Routes middleware
 app.use("/api", productRouter);
